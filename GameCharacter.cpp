@@ -15,7 +15,7 @@ void GameCharacter::increaseHealth(int delta) {
   currentHealth = std::clamp(currentHealth + delta, 0, maxHealth);
 }
 
-void GameCharacter::maxHealthIncrease(int delta) {
+void GameCharacter::increaseMaxHealth(int delta) {
   maxHealth = std::max(1, maxHealth + delta);
   currentHealth = std::clamp(currentHealth, 0, maxHealth);
 }
@@ -28,13 +28,11 @@ void GameCharacter::increaseDefense(int delta) {
   defense = std::max(0, defense + delta);
 }
 
-int GameCharacter::takeDamage(int amount) {
-  amount = std::max(0, amount);
-
-  int damage = std::max(0, amount - defense);
-  currentHealth = std::max(0, currentHealth - damage);
-
-  return damage;
+int GameCharacter::takeDamage(int rawAmount) {
+  rawAmount = std::max(0, rawAmount);
+  const int dmg = std::max(0, rawAmount - defense);
+  currentHealth = std::max(0, currentHealth - dmg);
+  return dmg;
 }
 
 bool GameCharacter::isDead() const { return currentHealth <= 0; }

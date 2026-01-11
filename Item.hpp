@@ -10,7 +10,7 @@ private:
 
 public:
   Item(const std::string &nm, int hlt, int att, int deff);
-  virtual ~Item() = default;
+  ~Item() = default;
 
   const std::string &getName() const;
   int getHealth() const;

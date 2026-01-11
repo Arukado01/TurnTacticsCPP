@@ -3,31 +3,24 @@
 #include "Item.hpp"
 #include <vector>
 
-class Room;
-
 class Player : public GameCharacter {
 private:
-  Room *currentRoom = nullptr;
-  Room *previousRoom = nullptr;
+  int currentRoomId = 0;
+  int previousRoomId = -1;
   std::vector<Item> inventory;
 
   void addItem(const Item &itm);
-
-  void increaseStats(int hlt, int att, int deff) {
-    maxHealthIncrease(hlt);
-    increaseHealth(hlt);
-    increaseAttack(att);
-    increaseDefense(deff);
-  }
+  void applyItemStats(const Item &itm);
 
 public:
   Player(const std::string &nm, int mHlt, int att, int deff);
-  ~Player() = default;
 
-  void lootRoom(Room *room);
-  void changeRoom(Room *newRoom);
+  int getCurrentRoomId() const;
+  int getPreviousRoomId() const;
 
-  Room *getCurrentRoom() const { return currentRoom; }
-  Room *getPreviousRoom() const { return previousRoom; }
-  const std::vector<Item> &getInventory() const { return inventory; }
+  void moveToRoom(int newRoomId);
+
+  const std::vector<Item> &getInventory() const;
+
+  void grantReward(int deltaMaxHp, int deltaAtk, int deltaDef);
 };

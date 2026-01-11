@@ -10,7 +10,7 @@ protected:
   int defense;
 
   void increaseHealth(int delta);
-  void maxHealthIncrease(int delta);
+  void increaseMaxHealth(int delta);
   void increaseAttack(int delta);
   void increaseDefense(int delta);
 
@@ -24,6 +24,6 @@ public:
   int getAttack() const;
   int getDefense() const;
 
-  int takeDamage(int amount);
+  int takeDamage(int rawAmount);
   bool isDead() const;
 };
